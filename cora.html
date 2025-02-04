@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Ti, Mi Amor 💖</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            background: linear-gradient(to right, #ff99cc, #ff6699);
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+            position: relative;
+            text-align: center;
+        }
+        .message-container {
+            margin-bottom: 20px;
+        }
+        .title-message {
+            font-size: 40px;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 80, 120, 0.9);
+            padding: 15px 25px;
+            border-radius: 30px;
+        }
+        .subtitle-message {
+            font-size: 24px;
+            color: #fff;
+            margin-top: 10px;
+            font-weight: bold;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 20px;
+            border-radius: 20px;
+        }
+        .heart {
+            cursor: pointer;
+            transition: transform 0.2s;
+            margin-top: 20px;
+        }
+        .heart img {
+            width: 250px;
+            height: auto;
+            animation: heartbeat 1.5s infinite;
+        }
+        .heart:hover {
+            transform: scale(1.3);
+        }
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        .message {
+            position: absolute;
+            font-size: 28px;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 100, 150, 0.9);
+            padding: 16px 22px;
+            border-radius: 30px;
+            white-space: nowrap;
+            opacity: 0;
+            animation: floatRandom 2.5s ease-in-out forwards;
+        }
+        @keyframes floatRandom {
+            0% { transform: translate(0, 0) scale(1); opacity: 0; }
+            20% { opacity: 1; }
+            80% { opacity: 1; }
+            100% { transform: translate(var(--x), var(--y)) scale(1.3); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <audio id="background-music" src="cora.mp3" loop></audio>
+    <div class="message-container">
+        <div class="title-message">¿Quieres ser mi Valentín? 💖</div>
+        <div class="subtitle-message">Si lo quieres, presiona en el corazoncito 💕</div>
+    </div>
+    <div class="container">
+        <div class="heart" onclick="startMessages()">
+            <img src="https://gifs.org.es/gifs/2020/09/6632/gifs-de-corazones-en-movimiento.gif" alt="Corazón en movimiento">
+        </div>
+    </div>
+    <script>
+        const messages = [
+            "Eres linda 💕",
+            "Me gustas mucho 😍",
+            "Que lindaaa ✨",
+            "Me encantas 💖",
+            "Besitosss 😘",
+            "Abracitoooos 🤗",
+            "Eres mi persona favorita 💞",
+            "Siempre pienso en ti 💗",
+        ];
+
+        function startMessages() {
+            document.getElementById("background-music").play();
+            setInterval(createMessage, 90); // Más rápido y más mensajes a la vez
+        }
+
+        function createMessage() {
+            const message = document.createElement("div");
+            message.className = "message";
+            message.innerText = messages[Math.floor(Math.random() * messages.length)];
+            document.body.appendChild(message);
+            
+            const startX = Math.random() * window.innerWidth;
+            const startY = Math.random() * window.innerHeight;
+            message.style.left = `${startX}px`;
+            message.style.top = `${startY}px`;
+            
+            const randomX = (Math.random() - 0.5) * 800 + "px";
+            const randomY = (Math.random() - 0.5) * 800 + "px";
+            message.style.setProperty('--x', randomX);
+            message.style.setProperty('--y', randomY);
+            
+            setTimeout(() => {
+                message.remove();
+            }, 2500);
+        }
+    </script>
+</body>
+</html>
